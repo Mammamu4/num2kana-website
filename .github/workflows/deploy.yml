@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Add CNAME file
-        run: echo "sub.example.com" > dist/CNAME
+        run: echo "num2kana.fredriketsare.se" > dist/CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
