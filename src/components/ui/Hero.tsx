@@ -12,8 +12,8 @@ const Hero: FC<HeroProps> = ({ activeTab, setActiveTab, tabs }) => {
 
   return (
     <div
-      className={`flex justify-center w-full bg-base-200 overflow-hidden transition-all duration-500 ease-in-out text-center ${
-        heroExpanded ? "min-h-[400px]" : "min-h-[100px]"
+      className={`flex justify-center w-full bg-base-200 overflow-hidden text-base-content transition-all duration-500 ease-in-out text-center relative ${
+        heroExpanded ? "min-h-[300px]" : "min-h-[100px]"
       }`}
     >
       <div className="max-w-md">
@@ -21,8 +21,13 @@ const Hero: FC<HeroProps> = ({ activeTab, setActiveTab, tabs }) => {
           className="relative w-full cursor-pointer"
           onClick={() => setHeroExpanded(!heroExpanded)}
         >
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold my-8">Learn Japanese Numerals</h1>
-          <button className="btn btn-circle btn-sm absolute right-0 top-1/2 transform -translate-y-1/2">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold my-8">
+            Learn Japanese Numerals
+          </h1>
+          <button
+            onClick={() => setHeroExpanded(!heroExpanded)}
+            className="btn btn-circle btn-sm absolute -right-10 top-1/2 transform -translate-y-1/2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className={`h-6 w-6 transition-transform duration-300 ${
@@ -48,8 +53,7 @@ const Hero: FC<HeroProps> = ({ activeTab, setActiveTab, tabs }) => {
           }`}
         >
           <p className="text-xl font-light max-w-[80%] mx-auto">
-            Learn to read, write, and understand Japanese with fun, interactive
-            lessons designed to build your skills one step at a time.
+            Learn to read, write, and understand Japanese numbers.
           </p>
           <div className="join flex justify-center my-8">
             {tabs.map((tab) => (
@@ -67,7 +71,7 @@ const Hero: FC<HeroProps> = ({ activeTab, setActiveTab, tabs }) => {
           <div className="flex justify-center space-x-4 my-8">
             <object
               className=""
-              data="https://img.shields.io/npm/v/num2kana?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=for-the-badge&logo=npm&label=num2kana&color=605DFF&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fnum2kana"
+              data="https://img.shields.io/npm/v/num2kana?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=for-the-badge&logo=npm&label=num2kana&color=primary&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fnum2kana"
               type="image/svg+xml"
               aria-label="NPM Version"
             />

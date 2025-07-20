@@ -3,9 +3,12 @@ import "./App.css";
 import type { Tab, TabName } from "./types";
 import Hero from "./components/ui/Hero";
 
+import ThemeSwitcher from "./components/ui/ThemeSwitcher";
+
 import Quiz from "./components/ui/Quiz";
 import Learn from "./components/ui/Learn";
 import About from "./components/ui/About";
+import Footer from "./components/ui/Footer";
 
 function App() {
   const tabs: Tab[] = [
@@ -18,6 +21,9 @@ function App() {
 
   return (
     <div>
+      <div className="fixed top-4 right-4 z-100">
+        <ThemeSwitcher />
+      </div>
       <Hero activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
       <div>
         {tabs.map((tab) => {
@@ -27,6 +33,7 @@ function App() {
           return null;
         })}
       </div>
+      <Footer />
     </div>
   );
 }
