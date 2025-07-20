@@ -31,7 +31,7 @@ const Learn = () => {
     }
   };
   return (
-    <div className="p-16 flex flex-col items-center text-base-content bg-base-100">
+    <div className="p-8 md:p-16 flex flex-col items-center text-base-content bg-base-100">
       <input
         type="number"
         className="input md:input-xl validator"
@@ -47,7 +47,7 @@ const Learn = () => {
       />
       <p className="validator-hint">Not a valid number</p>
       <div
-        className={`overflow-hidden mt-4 transition-all duration-500 ease-in-out ${
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
           numberInput != null
             ? "max-h-[500px] opacity-100"
             : "max-h-0 opacity-0"

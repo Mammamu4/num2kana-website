@@ -33,7 +33,7 @@ const ThemeSwitcher = () => {
   ];
 
   return (
-    <div className="dropdown mb-72">
+    <div className="dropdown dropdown-top md:dropdown-bottom">
       <div tabIndex={0} role="button" className="btn m-1">
         Theme
         <svg

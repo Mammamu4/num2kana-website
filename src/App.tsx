@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div>
-      <div className="fixed top-4 right-4 z-100">
+      <div className="fixed bottom-4 right-4 z-100 md:top-4 md:bottom-auto">
         <ThemeSwitcher />
       </div>
       <Hero activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
