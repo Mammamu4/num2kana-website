@@ -1,5 +1,6 @@
-import { useState, type FC } from "react";
+import { useState, type FC, useEffect } from "react";
 import type { NumberFormat } from "../../../types";
+import { useQuiz } from "../../../context/QuizContext";
 
 interface NumberFormatOptionsProps {
   setNumberFormat: (format: NumberFormat) => void;
@@ -8,8 +9,15 @@ interface NumberFormatOptionsProps {
 const NumberFormatOptions: FC<NumberFormatOptionsProps> = ({
   setNumberFormat,
 }) => {
+  const { quizOptions } = useQuiz();
   const [selectedNumberFormat, setSelectedNumberFormat] =
     useState<NumberFormat>("kanji");
+
+  // Initialize from context when component mounts
+  useEffect(() => {
+    setSelectedNumberFormat(quizOptions.numberFormat);
+  }, [quizOptions]);
+
   const numberFormats: { format: NumberFormat; title: string }[] = [
     { format: "kanji", title: "Kanji" },
     { format: "hiragana", title: "Hiragana" },

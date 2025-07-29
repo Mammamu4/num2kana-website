@@ -1,6 +1,13 @@
 export type NumberFormat = "kanji" | "hiragana" | "katakana" | "romaji";
 export type QuizMode = "num-jap" | "jap-num";
 
+export interface Question {
+  number: number;
+  kanji: string;
+  hiragana: string;
+  katakana: string;
+  romaji: string;
+}
 export interface QuizOptions {
   numbers: NumberRange | number[];
   questionCount: number;

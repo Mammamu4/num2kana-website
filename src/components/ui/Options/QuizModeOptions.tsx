@@ -1,11 +1,13 @@
-import React, { type FC } from "react";
+import React, { type FC, useEffect } from "react";
 import type { QuizMode } from "../../../types";
+import { useQuiz } from "../../../context/QuizContext";
 
 interface QuizModeOptionsProps {
   setQuizMode: (mode: QuizMode) => void;
 }
 
 const QuizModeOptions: FC<QuizModeOptionsProps> = ({ setQuizMode }) => {
+  const { quizOptions } = useQuiz();
   const quizModes: { quizMode: QuizMode; title: string; subtitle: string }[] = [
     {
       quizMode: "num-jap",
@@ -20,6 +22,11 @@ const QuizModeOptions: FC<QuizModeOptionsProps> = ({ setQuizMode }) => {
   ];
   const [selectedQuizMode, setSelectedQuizMode] =
     React.useState<QuizMode>("num-jap");
+
+  // Initialize from context when component mounts
+  useEffect(() => {
+    setSelectedQuizMode(quizOptions.quizMode);
+  }, [quizOptions]);
 
   const handleQuizModeSelect = (mode: QuizMode) => {
     setSelectedQuizMode(mode);

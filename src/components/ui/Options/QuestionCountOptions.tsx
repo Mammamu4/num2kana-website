@@ -1,4 +1,5 @@
-import { useState, type FC } from "react";
+import { useState, type FC, useEffect } from "react";
+import { useQuiz } from "../../../context/QuizContext";
 
 interface QuestionCountOptionsProps {
   setQuestionCount: (count: number) => void;
@@ -7,8 +8,14 @@ interface QuestionCountOptionsProps {
 const QuestionCountOptions: FC<QuestionCountOptionsProps> = ({
   setQuestionCount,
 }) => {
+  const { quizOptions } = useQuiz();
   const questionCounts: number[] = [5, 10, 15, 20, 25, 30];
   const [selectedQuestionCount, setSelectedQuestionCount] = useState<number>(5);
+
+  // Initialize from context when component mounts
+  useEffect(() => {
+    setSelectedQuestionCount(quizOptions.questionCount);
+  }, [quizOptions]);
 
   const handleQuestionCountChange = (count: number) => {
     setQuestionCount(count);

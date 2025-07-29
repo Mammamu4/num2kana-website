@@ -1,11 +1,13 @@
-import { useState, type FC } from "react";
+import { useState, type FC, useEffect } from "react";
 import type { NumberRange } from "../../../types";
+import { useQuiz } from "../../../context/QuizContext";
 
 interface NumberOptionsProps {
   setNumbers: (newNumbers: NumberRange | number[]) => void;
 }
 
 const NumberOptions: FC<NumberOptionsProps> = ({ setNumbers }) => {
+  const { quizOptions } = useQuiz();
   const [selectedRangeIndex, setSelectedRangeIndex] = useState<number>(0);
   const [selectedSetIndex, setSelectedSetIndex] = useState<number>(0);
   const [isRangeMode, setIsRangeMode] = useState<boolean>(true);
@@ -52,6 +54,34 @@ const NumberOptions: FC<NumberOptionsProps> = ({ setNumbers }) => {
     },
   ];
 
+  // Initialize from context when component mounts
+  useEffect(() => {
+    const numbers = quizOptions.numbers;
+
+    // Check if numbers is an array (set) or a range
+    if (Array.isArray(numbers)) {
+      // Find matching set
+      const setIndex = numberSets.findIndex((set) =>
+        JSON.stringify(set.numbers) === JSON.stringify(numbers)
+      );
+
+      if (setIndex !== -1) {
+        setSelectedSetIndex(setIndex);
+        setIsRangeMode(false);
+      }
+    } else {
+      // Find matching range
+      const rangeIndex = numberRanges.findIndex(
+        (range) => range.start === numbers.start && range.end === numbers.end
+      );
+
+      if (rangeIndex !== -1) {
+        setSelectedRangeIndex(rangeIndex);
+        setIsRangeMode(true);
+      }
+    }
+  }, [quizOptions]);
+
   const handleNumberRangeSelect = (index: number) => {
     setSelectedRangeIndex(index);
     setIsRangeMode(true);
@@ -70,7 +100,9 @@ const NumberOptions: FC<NumberOptionsProps> = ({ setNumbers }) => {
     <div className="w-full">
       <div className="tabs tabs-boxed mb-6 justify-center">
         <button
-          className={`tab tab-lg text-base-content ${isRangeMode ? "tab-active" : ""}`}
+          className={`tab tab-lg text-base-content ${
+            isRangeMode ? "tab-active" : ""
+          }`}
           onClick={() => {
             setIsRangeMode(true);
             setNumbers(numberRanges[selectedRangeIndex]);
@@ -79,7 +111,9 @@ const NumberOptions: FC<NumberOptionsProps> = ({ setNumbers }) => {
           Ranges
         </button>
         <button
-          className={`tab tab-lg text-base-content ${!isRangeMode ? "tab-active" : ""}`}
+          className={`tab tab-lg text-base-content ${
+            !isRangeMode ? "tab-active" : ""
+          }`}
           onClick={() => {
             setIsRangeMode(false);
             setNumbers(numberSets[selectedSetIndex].numbers);
